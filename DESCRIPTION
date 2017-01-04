@@ -6,10 +6,13 @@ Description: Users may specifiy what fundamental qualities of a study have
     or have not changed in an attempt to reproduce or replicate the original. The
     differences and whether or not the study has been adequately reproduced or
     replicated are visualized.
-Imports: png
 Depends:
     R (>= 3.3.1)
 License: MIT
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1
+Imports:
+	grDevices,
+	grid,
+	png

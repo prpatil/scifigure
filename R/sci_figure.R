@@ -64,8 +64,7 @@ sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE){
 
 	for(j in 1:ncol(experiments)){
 		for(i in 1:nrow(experiments)){
-			img <- png::readPNG(system.file("icons", paste0(paste(rownames(experiments)[i], experiments[i,j], sep = "_"), ".png"), package = "repfigure"))
-			grid::grid.raster(img, x = j/(ncol(experiments)+1), y = yht[i], width = 0.05 - 0.001*ifelse(ncol(experiments) > 14, ncol(experiments), 0))
+			grid::grid.raster(icons[[paste(rownames(experiments)[i], experiments[i,j], sep = "_")]], x = j/(ncol(experiments)+1), y = yht[i], width = 0.05 - 0.001*ifelse(ncol(experiments) > 14, ncol(experiments), 0))
 		}
 	}
 

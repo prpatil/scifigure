@@ -14,5 +14,4 @@ LazyData: true
 RoxygenNote: 5.0.1
 Imports:
 	grDevices,
-	grid,
-	png
+	grid

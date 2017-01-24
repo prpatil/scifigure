@@ -40,15 +40,20 @@ sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE){
 		stop("Invalid cell value in experiments data frame.")
 	}
 
+	if(ncol(experiments) > 20){
+		experiments <- experiments[,1:20]
+		warning("Only showing the first 20 experiments for ease of plotting.")
+	}
+
 	idx <- !(rownames(experiments) %in% hide_stages)
 	stage_names <- c("Population", "Question", "Hypothesis", "Exp. Design", "Experimenter", "Data", "Analysis Plan", "Analyst", "Code", "Estimate", "Claim")
 	stage_names <- stage_names[idx]
 
-	experiments <- experiments[idx,]
+	experiments <- experiments[idx,,drop=FALSE]
 
 	if(grDevices::dev.cur() != 1){grDevices::dev.off()}
 
-	gptext <- grid::gpar(fontsize = 14 - min(nrow(experiments), 7))
+	gptext <- grid::gpar(fontsize = 16 - min(nrow(experiments), 7))
 
 	yht <- seq(0.95, 0.05, length = nrow(experiments))
 
@@ -61,10 +66,13 @@ sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE){
 
 	vp2 <- grid::viewport(x = 0.5, y = 0.5, width = 0.6, height = 0.9)
 	grid::pushViewport(vp2)
-
+	
 	for(j in 1:ncol(experiments)){
 		for(i in 1:nrow(experiments)){
-			grid::grid.raster(icons[[paste(rownames(experiments)[i], experiments[i,j], sep = "_")]], x = j/(ncol(experiments)+1), y = yht[i], width = 0.05 - 0.001*ifelse(ncol(experiments) > 14, ncol(experiments), 0))
+			#grid::grid.raster(icons[[paste(rownames(experiments)[i], experiments[i,j], sep = "_")]], x = j/(ncol(experiments)+1), y = yht[i], width = 0.05 - 0.001*ifelse(ncol(experiments) > 14, ncol(experiments), 0))
+			#grid::grid.raster(icons[[paste(rownames(experiments)[i], experiments[i,j], sep = "_")]], x = j/(ncol(experiments)+1), y = yht[i], height = grid::unit(1/(nrow(experiments)*1.2), "snpc"), width = grid::unit(min(.1, 1/((ncol(experiments)*3))), "npc"))
+			grid::grid.raster(icons[[paste(rownames(experiments)[i], experiments[i,j], sep = "_")]], x = j/(ncol(experiments)+1), y = yht[i], height = 0.08 - 0.03*(ncol(experiments) > 4), width = grid::unit(max(0.05, min(.1, 1/((ncol(experiments)*3)))), "snpc"))
+
 		}
 	}
 

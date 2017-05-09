@@ -3,6 +3,7 @@ title: "Visualizing Scientific Replication with repfigure"
 author: "Prasad Patil"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+bibliography: references.bib
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -10,8 +11,10 @@ vignette: >
 ---
 
 repfigure contains simple utilites for generating visual representations of scientific reproduction and replication efforts.
-This package is a companion to an article [ref] that defines these efforts and explains why such visualizations are helpful.
-In this vignette, we will demonstrate how to use the functions in this package and recreate the main figure in [ref].
+This package is a companion to an article [@patil2016statistical] that defines these efforts and explains why such visualizations are helpful.
+In this vignette, we will demonstrate how to use the functions in this package and recreate the main figure in [@patil2016statistical]. Note that 
+we use the flag "rmk = T" when calling the sci_figure function to properly render the figures in rmarkdown. This is not 
+necessary when using this package in the UI.
 
 ## Basic usage
 
@@ -25,7 +28,7 @@ hide_stages = NULL
 sci_figure(exps, rmk = T)	
 ```
 
-To produce this figure, we first initialize a data frame using init_experiments, passing the parameter 2 to indicate that the
+To produce this figure, we first initialize a data frame using init_experiments, passing the parameter value 2 to indicate that the
 data frame should represent two studies (with default names for each experiment). We then pass this data frame to sci_figure, which renders the figure based on the contents of exps.
 Note that a legend is automatically generated, indicating that each step in each of the experiments is "observed". We can modify the
 contents of exps to change change how elements of each experiment are displayed.
@@ -43,7 +46,7 @@ the experimenter, analyst, and estimate in the second study differed from the fi
 we hide the population and hypothesis stages.
 
 We have also included convenience wrapper functions to generate visualizations of the definitions of reproducibility and replicability 
-given in [ref]:
+given in [@patil2016statistical]:
 
 ```{r, fig.width = 9, fig.height = 7}
 reproduce_figure(rmk=T)
@@ -55,7 +58,7 @@ replicate_figure(rmk=T)
 
 ## Recreating Figure 1
 
-The following code snippet recreates the columns in Figure 1 of [ref]:
+The following code snippet recreates the columns in Figure 1 of [@patil2016statistical]:
 
 ```{r, fig.width = 14, fig.height = 7}
 exps <- init_experiments(9, c("Original", "Reproducible", "Orignal", "Replicable", "Begley", "Payne et. al.", "Vianello (OSF)", "Potti", "Baggerly & Coombs"))
@@ -68,3 +71,5 @@ exps[c("data", "code"), 9] <- "different" # Baggerly & Coombes
 
 sci_figure(exps, rmk = T)
 ```
+
+## References

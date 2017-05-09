@@ -4,10 +4,14 @@
 \alias{replicate_figure}
 \title{Create a figure depicting replicability}
 \usage{
-replicate_figure()
+replicate_figure(...)
 }
 \description{
 \code{replicate_figure} is a wrapper around the \code{sci_figure} function
-to illustrate replicability in a two-experiment setting.
+to illustrate replicability in a two-experiment setting. Options for
+\code{sci_figure} are accepted, but this may be run as is.
+}
+\seealso{
+\code{sci_figure}
 }
 

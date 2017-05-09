@@ -15,6 +15,7 @@
 #' that all stages will be displayed.
 #' @param names_of_stages Logical indicating whether or not the names of the
 #' stages should be displayed.
+#' @param rmk Logical indicating whether this function is being run within an rmarkdown file
 #' @export
 #' @note For the parameter \code{experiments}, the four values any cell may take
 #' are: \code{observed}, \code{different}, \code{unobserved}, \code{incorrect}.
@@ -34,7 +35,7 @@
 #' @seealso \code{\link{init_experiments}}
 
 
-sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE){
+sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE, rmk = FALSE){
 
 	if(!all(unlist(lapply(experiments, function(x){x %in% c("observed", "different", "unobserved", "incorrect")})))){
 		stop("Invalid cell value in experiments data frame.")
@@ -51,7 +52,9 @@ sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE){
 
 	experiments <- experiments[idx,,drop=FALSE]
 
-	if(grDevices::dev.cur() != 1){grDevices::dev.off()}
+	if(!rmk){
+		if(grDevices::dev.cur() != 1){grDevices::dev.off()}
+	}
 
 	gptext <- grid::gpar(fontsize = 16 - min(nrow(experiments), 7))
 
@@ -69,10 +72,7 @@ sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE){
 	
 	for(j in 1:ncol(experiments)){
 		for(i in 1:nrow(experiments)){
-			#grid::grid.raster(icons[[paste(rownames(experiments)[i], experiments[i,j], sep = "_")]], x = j/(ncol(experiments)+1), y = yht[i], width = 0.05 - 0.001*ifelse(ncol(experiments) > 14, ncol(experiments), 0))
-			#grid::grid.raster(icons[[paste(rownames(experiments)[i], experiments[i,j], sep = "_")]], x = j/(ncol(experiments)+1), y = yht[i], height = grid::unit(1/(nrow(experiments)*1.2), "snpc"), width = grid::unit(min(.1, 1/((ncol(experiments)*3))), "npc"))
 			grid::grid.raster(icons[[paste(rownames(experiments)[i], experiments[i,j], sep = "_")]], x = j/(ncol(experiments)+1), y = yht[i], height = 0.08 - 0.03*(ncol(experiments) > 4), width = grid::unit(max(0.05, min(.1, 1/((ncol(experiments)*3)))), "snpc"))
-
 		}
 	}
 

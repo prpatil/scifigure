@@ -1,0 +1,70 @@
+---
+title: "Visualizing Scientific Replication with repfigure"
+author: "Prasad Patil"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+repfigure contains simple utilites for generating visual representations of scientific reproduction and replication efforts.
+This package is a companion to an article [ref] that defines these efforts and explains why such visualizations are helpful.
+In this vignette, we will demonstrate how to use the functions in this package and recreate the main figure in [ref].
+
+## Basic usage
+
+We have defined a general set of steps that comprise the conduct of a scientific study, and have compiled a set of icons 
+to represent each step. Let us visualize these steps and icons for two studies using the repfigure package:
+
+```{r, fig.width = 9, fig.height = 7}
+library(repfigure)
+exps <- init_experiments(2)
+hide_stages = NULL
+sci_figure(exps, rmk = T)	
+```
+
+To produce this figure, we first initialize a data frame using init_experiments, passing the parameter 2 to indicate that the
+data frame should represent two studies (with default names for each experiment). We then pass this data frame to sci_figure, which renders the figure based on the contents of exps.
+Note that a legend is automatically generated, indicating that each step in each of the experiments is "observed". We can modify the
+contents of exps to change change how elements of each experiment are displayed.
+
+```{r, fig.width = 9, fig.height = 7}
+exps <- init_experiments(2, c("Brady et. al.", "Thomas et. al."))
+exps["analysis_plan", 1] <- "unobserved"
+exps[c("experimenter", "analyst", "estimate"), 2] <- "different"
+sci_figure(exps, hide_stages <- c("population", "hypothesis"), rmk = T)
+```
+
+Above we first specified experiment names for each experiment when we initialized the data frame. These names will be the column headers 
+in the figure. Next, we modified some of the elements of the data frame: the analysis plan in the first study is missing, and 
+the experimenter, analyst, and estimate in the second study differed from the first. Finally, when generating the visualization 
+we hide the population and hypothesis stages.
+
+We have also included convenience wrapper functions to generate visualizations of the definitions of reproducibility and replicability 
+given in [ref]:
+
+```{r, fig.width = 9, fig.height = 7}
+reproduce_figure(rmk=T)
+```
+
+```{r, fig.width = 9, fig.height = 7}
+replicate_figure(rmk=T)
+```
+
+## Recreating Figure 1
+
+The following code snippet recreates the columns in Figure 1 of [ref]:
+
+```{r, fig.width = 14, fig.height = 7}
+exps <- init_experiments(9, c("Original", "Reproducible", "Orignal", "Replicable", "Begley", "Payne et. al.", "Vianello (OSF)", "Potti", "Baggerly & Coombs"))
+exps["analyst", 2] <- "different" # Reproducible
+exps[c("experimenter", "data", "analyst", "code", "estimate", "claim"), 4] <- "different" # Replicable
+exps[c("population", "hypothesis", "experimental_design", "experimenter", "data", "analysis_plan", "analyst", "code", "estimate"), 5] <- "unobserved" # Begley
+exps[c("population", "experimenter", "data", "analyst", "code", "estimate", "claim"), 7] <- "different" # Vianello (OSF)
+exps[c("data", "code"), 8] <- "incorrect" # Potti
+exps[c("data", "code"), 9] <- "different" # Baggerly & Coombes
+
+sci_figure(exps, rmk = T)
+```

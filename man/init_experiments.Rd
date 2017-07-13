@@ -26,4 +26,3 @@ names = c("Run_16_01", "Run_16_04", "Run_16_07",
 \seealso{
 \code{\link{sci_figure}}
 }
-

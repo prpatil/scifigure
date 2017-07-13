@@ -6,12 +6,14 @@
 \usage{
 reproduce_figure(...)
 }
+\arguments{
+\item{...}{Additional arguments passed to \code{sci_figure}.}
+}
 \description{
 \code{reproduce_figure} is a wrapper around the \code{sci_figure} function
 to illustrate reproducibility in a two-experiment setting. Options for
 \code{sci_figure} are accepted, but this may be run as is.
 }
 \seealso{
-\code{sci_figure}
+\code{\link{sci_figure}} for additional arguments.
 }
-

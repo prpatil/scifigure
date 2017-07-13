@@ -50,4 +50,3 @@ sci_figure(exps)
 \seealso{
 \code{\link{init_experiments}}
 }
-

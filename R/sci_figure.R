@@ -15,7 +15,6 @@
 #' that all stages will be displayed.
 #' @param names_of_stages Logical indicating whether or not the names of the
 #' stages should be displayed.
-#' @param rmk Logical indicating whether this function is being run within an rmarkdown file
 #' @export
 #' @note For the parameter \code{experiments}, the four values any cell may take
 #' are: \code{observed}, \code{different}, \code{unobserved}, \code{incorrect}.
@@ -35,7 +34,7 @@
 #' @seealso \code{\link{init_experiments}}
 
 
-sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE, rmk = FALSE){
+sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE){
 
 	if(!all(unlist(lapply(experiments, function(x){x %in% c("observed", "different", "unobserved", "incorrect")})))){
 		stop("Invalid cell value in experiments data frame.")
@@ -52,9 +51,7 @@ sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE, 
 
 	experiments <- experiments[idx,,drop=FALSE]
 
-	if(!rmk){
-		if(grDevices::dev.cur() != 1){grDevices::dev.off()}
-	}
+	grid::grid.newpage()
 
 	gptext <- grid::gpar(fontsize = 16 - min(nrow(experiments), 7))
 

@@ -5,8 +5,7 @@
 \title{Create a figure depicting reproducibility/replicability of a set of
 scientific experiments}
 \usage{
-sci_figure(experiments, hide_stages = NULL, names_of_stages = TRUE,
-  rmk = FALSE)
+sci_figure(experiments, hide_stages = NULL, names_of_stages = TRUE)
 }
 \arguments{
 \item{experiments}{A data frame, which can be initialized with \code{init_experiments()},
@@ -21,8 +20,6 @@ that all stages will be displayed.}
 
 \item{names_of_stages}{Logical indicating whether or not the names of the
 stages should be displayed.}
-
-\item{rmk}{Logical indicating whether this function is being run within an rmarkdown file}
 }
 \description{
 \code{sci_figure} creates a graphical representation of changes in a

@@ -3,7 +3,7 @@ R package for generating a reproducibility/replicability study comparison visual
 
 ## Dependencies
 
-grDevices, grid
+grid
 
 ## Installation
 

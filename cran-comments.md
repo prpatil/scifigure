@@ -1,3 +1,9 @@
+## Resubmission
+
+* Corrected typos in LICENSE and DESCRIPTION
+* Title field to title case.
+* Added reference to Description field.
+
 ## Test environments
 * local Windows installation, R 3.4.1
 * Max OS 10.12, R 3.4.1

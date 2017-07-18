@@ -10,7 +10,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-repfigure contains simple utilites for generating visual representations of scientific reproduction and replication efforts.
+scifigure contains simple utilites for generating visual representations of scientific reproduction and replication efforts.
 This package is a companion to an article [@patil2016statistical] that defines these efforts and explains why such visualizations are helpful.
 In this vignette, we will demonstrate how to use the functions in this package and recreate the main figure in [@patil2016statistical].
 
@@ -20,7 +20,7 @@ We have defined a general set of steps that comprise the conduct of a scientific
 to represent each step. Let us visualize these steps and icons for two studies using the repfigure package:
 
 ```{r, fig.width = 9, fig.height = 7}
-library(repfigure)
+library(scifigure)
 exps <- init_experiments(2)
 hide_stages = NULL
 sci_figure(exps)	

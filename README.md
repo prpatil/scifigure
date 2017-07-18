@@ -1,4 +1,4 @@
-# repfigure
+# scifigure
 R package for generating a reproducibility/replicability study comparison visualization.
 
 ## Dependencies
@@ -9,7 +9,7 @@ grDevices, grid
 
 (must have devtools package installed)
 
-devtools::install_github("prpatil/repfigure")
+devtools::install_github("prpatil/scifigure")
 
 ## Usage
 

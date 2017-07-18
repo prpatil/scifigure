@@ -12,7 +12,7 @@
 
 <meta name="author" content="Prasad Patil" />
 
-<meta name="date" content="2017-07-13" />
+<meta name="date" content="2017-07-18" />
 
 <title>Visualizing Scientific Replication with repfigure</title>
 
@@ -52,15 +52,15 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 <h1 class="title toc-ignore">Visualizing Scientific Replication with repfigure</h1>
 <h4 class="author"><em>Prasad Patil</em></h4>
-<h4 class="date"><em>2017-07-13</em></h4>
+<h4 class="date"><em>2017-07-18</em></h4>
 
 
 
-<p>repfigure contains simple utilites for generating visual representations of scientific reproduction and replication efforts. This package is a companion to an article <span class="citation">(Patil, Peng, and Leek 2016)</span> that defines these efforts and explains why such visualizations are helpful. In this vignette, we will demonstrate how to use the functions in this package and recreate the main figure in <span class="citation">(Patil, Peng, and Leek 2016)</span>.</p>
+<p>scifigure contains simple utilites for generating visual representations of scientific reproduction and replication efforts. This package is a companion to an article <span class="citation">(Patil, Peng, and Leek 2016)</span> that defines these efforts and explains why such visualizations are helpful. In this vignette, we will demonstrate how to use the functions in this package and recreate the main figure in <span class="citation">(Patil, Peng, and Leek 2016)</span>.</p>
 <div id="basic-usage" class="section level2">
 <h2>Basic usage</h2>
 <p>We have defined a general set of steps that comprise the conduct of a scientific study, and have compiled a set of icons to represent each step. Let us visualize these steps and icons for two studies using the repfigure package:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(repfigure)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scifigure)
 exps &lt;-<span class="st"> </span><span class="kw">init_experiments</span>(<span class="dv">2</span>)
 hide_stages =<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">sci_figure</span>(exps)    </code></pre>

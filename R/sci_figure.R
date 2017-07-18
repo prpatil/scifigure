@@ -64,7 +64,7 @@ sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE){
 		grid::upViewport()
 	}
 
-	icons <- repfigure::icons
+	icons <- scifigure::icons
 
 	vp2 <- grid::viewport(x = 0.5, y = 0.5, width = 0.6, height = 0.9)
 	grid::pushViewport(vp2)

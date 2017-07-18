@@ -1,4 +1,4 @@
-Package: repfigure
+Package: scifigure
 Title: Visualize reproducibility/replication in a comparison of studies
 Version: 0.1.1
 Authors@R: person("Prasad", "Patil", email = "prpatil42@gmail.com", role = c("aut", "cre"))

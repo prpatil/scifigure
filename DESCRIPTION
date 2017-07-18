@@ -4,7 +4,7 @@ Version: 0.1.1
 Authors@R: person("Prasad", "Patil", email = "prpatil42@gmail.com", role = c("aut", "cre"))
 Description: Users may specify what fundamental qualities of a new study have 
              or have not changed in an attempt to reproduce or replicate an original study. A comparison of 
-			 the differences is visualized. Visualization approach follows Patil, Peng, and Leek (2016) <doi: https://doi.org/10.1101/066803>.
+			 the differences is visualized. Visualization approach follows Patil, Peng, and Leek (2016) <doi:10.1101/066803>.
 Depends:
     R (>= 3.3.1)
 License: MIT + file LICENSE

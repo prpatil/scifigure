@@ -1,8 +1,6 @@
 ## Resubmission
 
-* Corrected typos in LICENSE and DESCRIPTION
-* Title field to title case.
-* Added reference to Description field.
+* Fixed DOI format in DESCRIPTION.
 
 ## Test environments
 * local Windows installation, R 3.4.1

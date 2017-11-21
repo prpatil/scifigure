@@ -17,7 +17,7 @@ In this vignette, we will demonstrate how to use the functions in this package a
 ## Basic usage
 
 We have defined a general set of steps that comprise the conduct of a scientific study, and have compiled a set of icons 
-to represent each step. Let us visualize these steps and icons for two studies using the repfigure package:
+to represent each step. Let us visualize these steps and icons for two studies using the scifigure package:
 
 ```{r, fig.width = 9, fig.height = 7}
 library(scifigure)

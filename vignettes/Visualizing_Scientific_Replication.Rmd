@@ -1,11 +1,11 @@
 ---
-title: "Visualizing Scientific Replication with repfigure"
+title: "Visualizing Scientific Replication with scifigure"
 author: "Prasad Patil"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 bibliography: references.bib
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Visualizing Scientific Replication with scifigure}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

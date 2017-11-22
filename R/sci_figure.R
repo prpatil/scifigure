@@ -2,7 +2,7 @@
 #' scientific experiments
 #'
 #' \code{sci_figure} creates a graphical representation of changes in a
-#' a set of subsequent studies or reproduction attempts as compared to an 
+#' a set of subsequent studies or reproduction attempts as compared to an
 #' original study.
 #'
 #' @param experiments A data frame, which can be initialized with \code{init_experiments()},
@@ -26,7 +26,7 @@
 #' sci_figure(exps, hide_stages = c("population", "analyst"))
 #'
 #' # Do some manual manipulation to the experiments
-#' 
+#'
 #' exps["analyst", "Exp2"] <- "different"
 #' exps["code", c("Exp2", "Exp3")] <- "unobserved"
 #' sci_figure(exps)
@@ -34,7 +34,7 @@
 #' @seealso \code{\link{init_experiments}}
 
 
-sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE){
+sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE, diff=FALSE){
 
 	if(!all(unlist(lapply(experiments, function(x){x %in% c("observed", "different", "unobserved", "incorrect")})))){
 		stop("Invalid cell value in experiments data frame.")
@@ -64,11 +64,17 @@ sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE){
 		grid::upViewport()
 	}
 
-	icons <- scifigure::icons
+	if ( diff == FALSE ) {
+	  icons <- scifigure::icons
+	}
+	else {
+	  icons <- scifigure::icons_diff
+	}
+
 
 	vp2 <- grid::viewport(x = 0.5, y = 0.5, width = 0.6, height = 0.9)
 	grid::pushViewport(vp2)
-	
+
 	for(j in 1:ncol(experiments)){
 		for(i in 1:nrow(experiments)){
 			grid::grid.raster(icons[[paste(rownames(experiments)[i], experiments[i,j], sep = "_")]], x = j/(ncol(experiments)+1), y = yht[i], height = 0.08 - 0.03*(ncol(experiments) > 4), width = grid::unit(max(0.05, min(.1, 1/((ncol(experiments)*3)))), "snpc"))
@@ -86,5 +92,5 @@ sci_figure <- function(experiments, hide_stages = NULL, names_of_stages = TRUE){
 
 	cols <- c("#D20000", "#007888","#CDCDCD", "black")
 	grid::grid.rect(width = 0.25, height = 0.1, x = 0.3, y = c(0.2,0.4,0.6,0.8), gp = grid::gpar(fill = cols))
-	grid::grid.text(c("Incorrect", "Different", "Unobserved", "Original"), x = 0.3, y = c(0.1, 0.3, 0.5, 0.7), gp = grid::gpar(fontsize = 14))	
+	grid::grid.text(c("Incorrect", "Different", "Unobserved", "Original"), x = 0.3, y = c(0.1, 0.3, 0.5, 0.7), gp = grid::gpar(fontsize = 14))
 }

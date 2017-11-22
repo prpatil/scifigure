@@ -1,6 +1,6 @@
 ---
 title: "Visualizing Scientific Replication with repfigure"
-author: "Prasad Patil"
+author: "Prasad Patil with contributions by Nils Gehlenborg"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 bibliography: references.bib
@@ -49,7 +49,7 @@ To emphasize the differences between the studies, the __difference__ mode can be
 sci_figure(exps, hide_stages <- c("population", "hypothesis"), diff=T)
 ```
 
-The difference mode uses a set of four symbol that were chosen to be semantically close to the scenarios that they are encoding, i.e. "unobserved" is "$\times$", "different" is "$\neq$", and "incorrect" is "$!$". The least informative scenario in which both studies are the same is de-emphasized. 
+The difference mode uses a set of four symbols that were chosen to be semantically close to the scenarios that they are encoding, i.e. "unobserved" is "$\times$", "different" is "$\neq$", and "incorrect" is "$!$". The least informative scenario in which both studies are the same is de-emphasized. 
 
 We have also included convenience wrapper functions to generate visualizations of the definitions of reproducibility and replicability 
 given in [@patil2016statistical]:

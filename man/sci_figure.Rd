@@ -5,7 +5,8 @@
 \title{Create a figure depicting reproducibility/replicability of a set of
 scientific experiments}
 \usage{
-sci_figure(experiments, hide_stages = NULL, names_of_stages = TRUE)
+sci_figure(experiments, hide_stages = NULL, names_of_stages = TRUE,
+  diff = FALSE)
 }
 \arguments{
 \item{experiments}{A data frame, which can be initialized with \code{init_experiments()},
@@ -20,10 +21,15 @@ that all stages will be displayed.}
 
 \item{names_of_stages}{Logical indicating whether or not the names of the
 stages should be displayed.}
+
+\item{diff}{(optional) A Boolean flag to indicate whether the rendering of the figure should
+emphasize the differences between the experiments ("difference mode"). The difference mode uses
+a set of four symbols that are semantically close to the scenarios that they are encoding.
+The default value is \code{FALSE}.}
 }
 \description{
 \code{sci_figure} creates a graphical representation of changes in a
-a set of subsequent studies or reproduction attempts as compared to an 
+a set of subsequent studies or reproduction attempts as compared to an
 original study.
 }
 \note{
@@ -42,6 +48,10 @@ sci_figure(exps, hide_stages = c("population", "analyst"))
 exps["analyst", "Exp2"] <- "different"
 exps["code", c("Exp2", "Exp3")] <- "unobserved"
 sci_figure(exps)
+
+# Create the same figure using the difference mode
+
+sci_figure(exps, diff=T)
 
 }
 \seealso{

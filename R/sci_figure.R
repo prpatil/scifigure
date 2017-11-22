@@ -15,6 +15,11 @@
 #' that all stages will be displayed.
 #' @param names_of_stages Logical indicating whether or not the names of the
 #' stages should be displayed.
+#' @param diff (optional) A Boolean flag to indicate whether the rendering of the figure should
+#' emphasize the differences between the experiments ("difference mode"). The difference mode uses
+#' a set of four symbols that are semantically close to the scenarios that they are encoding.
+#' The default value is \code{FALSE}.
+#'
 #' @export
 #' @note For the parameter \code{experiments}, the four values any cell may take
 #' are: \code{observed}, \code{different}, \code{unobserved}, \code{incorrect}.
@@ -30,6 +35,11 @@
 #' exps["analyst", "Exp2"] <- "different"
 #' exps["code", c("Exp2", "Exp3")] <- "unobserved"
 #' sci_figure(exps)
+#'
+#' # Create the same figure using the difference mode
+#'
+#' sci_figure(exps, diff=T)
+
 #'
 #' @seealso \code{\link{init_experiments}}
 

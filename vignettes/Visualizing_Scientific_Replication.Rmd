@@ -1,11 +1,18 @@
 ---
+
+title: "Visualizing Scientific Replication with repfigure"
+author: "Prasad Patil with contributions by Nils Gehlenborg"
+
 title: "Visualizing Scientific Replication with scifigure"
 author: "Prasad Patil"
+
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 bibliography: references.bib
 vignette: >
+
   %\VignetteIndexEntry{Visualizing Scientific Replication with scifigure}
+
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -43,16 +50,37 @@ in the figure. Next, we modified some of the elements of the data frame: the ana
 the experimenter, analyst, and estimate in the second study differed from the first. Finally, when generating the visualization 
 we hide the population and hypothesis stages.
 
+To emphasize the differences between the studies, the __difference__ mode can be used via the `diff` flag:
+
+```{r, fig.width = 9, fig.height = 7}
+sci_figure(exps, hide_stages <- c("population", "hypothesis"), diff=T)
+```
+
+The difference mode uses a set of four symbols that were chosen to be semantically close to the scenarios that they are encoding, i.e. "unobserved" is "$\times$", "different" is "$\neq$", and "incorrect" is "$!$". The least informative scenario in which both studies are the same is de-emphasized. 
+
 We have also included convenience wrapper functions to generate visualizations of the definitions of reproducibility and replicability 
 given in [@patil2016statistical]:
 
 ```{r, fig.width = 9, fig.height = 7}
 reproduce_figure()
 ```
+And the same figure using the __difference__ mode to emphasize what is different between the studies:
+
+```{r, fig.width = 9, fig.height = 7}
+reproduce_figure(diff=T)
+```
+
 
 ```{r, fig.width = 9, fig.height = 7}
 replicate_figure()
 ```
+
+And the same figure using the __difference__ mode to emphasize what is different between the studies:
+
+```{r, fig.width = 9, fig.height = 7}
+replicate_figure(diff=T)
+```
+
 
 ## Recreating Figure 1
 
@@ -68,6 +96,13 @@ exps[c("data", "code"), 8] <- "incorrect" # Potti
 exps[c("data", "code"), 9] <- "different" # Baggerly & Coombes
 
 sci_figure(exps)
+```
+
+
+Here is the same figure using the difference mode, emphasizing what is different between the studies:
+
+```{r, fig.width = 14, fig.height = 7}
+sci_figure(exps, diff=T)
 ```
 
 ## References

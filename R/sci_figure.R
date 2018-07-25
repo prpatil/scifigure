@@ -122,22 +122,33 @@ sci_figure <- function(experiments, hide_stages = NULL,
     grid::pushViewport(vp4)
 
 
-    if ( diff == FALSE ) {
-      grid::grid.rect(width = 0.25, height = 0.1, x = 0.3, y = c(0.2,0.4,0.6,0.8), gp = grid::gpar(fill = cols))
-    }
-    else {
-      grid::grid.raster(icons[[3]], x=0.3, y=0.8, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
-      grid::grid.raster(icons[[4]], x=0.3, y=0.6, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
-      grid::grid.raster(icons[[1]], x=0.3, y=0.4, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
-      grid::grid.raster(icons[[2]], x=0.3, y=0.2, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
-    }
-
-
     ys = c(0.1, 0.3, 0.5, 0.7)[seq(length(leg_text))]
-    grid::grid.text(leg_text, x = 0.3, y = ys, gp = grid::gpar(fontsize = 14))
-
     ys2 = ys + 0.1
     # ys2 = c(0.2,0.4,0.6,0.8)
+
+    if ( diff == FALSE ) {
+      grid::grid.rect(width = 0.25, height = 0.1, x = 0.3, y = ys2, gp = grid::gpar(fill = cols))
+    }
+    else {
+      make_grid = function(icon, y_value) {
+        if (!is.na(y_value)) {
+          grid::grid.raster(icon, x=0.3, y=y_value, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
+        }
+      }
+      make_grid(icons[[3]], ys2[4])
+      make_grid(icons[[4]], ys2[3])
+      make_grid(icons[[1]], ys2[2])
+      make_grid(icons[[2]], ys2[1])
+      # grid::grid.raster(icons[[3]], x=0.3, y=ys2[4], height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
+      # grid::grid.raster(icons[[4]], x=0.3, y=ys2[3], height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
+      # grid::grid.raster(icons[[1]], x=0.3, y=ys2[2], height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
+      # grid::grid.raster(icons[[2]], x=0.3, y=ys2[1], height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
+    }
+
+
+    grid::grid.text(leg_text, x = 0.3, y = ys, gp = grid::gpar(fontsize = 14))
+
+
     grid::grid.rect(width = 0.25, height = 0.1, x = 0.3, y = ys2, gp = grid::gpar(fill = cols))
     grid::grid.text(leg_text, x = 0.3, y = ys, gp = grid::gpar(fontsize = 14))
   }

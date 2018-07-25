@@ -133,9 +133,12 @@ sci_figure <- function(experiments, hide_stages = NULL,
     }
 
 
-    grid::grid.text(leg_text, x = 0.3, y = c(0.1, 0.3, 0.5, 0.7), gp = grid::gpar(fontsize = 14))
+    ys = c(0.1, 0.3, 0.5, 0.7)[seq(length(leg_text))]
+    grid::grid.text(leg_text, x = 0.3, y = ys, gp = grid::gpar(fontsize = 14))
 
-    grid::grid.rect(width = 0.25, height = 0.1, x = 0.3, y = c(0.2,0.4,0.6,0.8), gp = grid::gpar(fill = cols))
-    grid::grid.text(leg_text, x = 0.3, y = c(0.1, 0.3, 0.5, 0.7), gp = grid::gpar(fontsize = 14))
+    ys2 = ys + 0.1
+    # ys2 = c(0.2,0.4,0.6,0.8)
+    grid::grid.rect(width = 0.25, height = 0.1, x = 0.3, y = ys2, gp = grid::gpar(fill = cols))
+    grid::grid.text(leg_text, x = 0.3, y = ys, gp = grid::gpar(fontsize = 14))
   }
 }

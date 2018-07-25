@@ -51,7 +51,7 @@ sci_figure(exps)
 
 # Create the same figure using the difference mode
 
-sci_figure(exps, diff=T)
+sci_figure(exps, diff=TRUE)
 
 }
 \seealso{

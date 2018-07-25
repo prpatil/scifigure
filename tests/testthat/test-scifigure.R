@@ -26,4 +26,6 @@ testthat::test_that("warnings and errors in sci_figure", {
     sci_figure(exp2)
   }, "Invalid cell")
 
+  replicate_figure()
+  reproduce_figure()
 })

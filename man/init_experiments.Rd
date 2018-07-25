@@ -19,9 +19,12 @@ column headers for user manipulation before calling \code{sci_figure}
 # Generate the default data frame of three experiments
 init_experiments()
 
-init_experiments(nexp = 5, 
-names = c("Run_16_01", "Run_16_04", "Run_16_07", 
-	"Run_16_09", "Run_16_12")) 
+init_experiments(nexp = 5,
+names = c("Run_16_01", "Run_16_04", "Run_16_07",
+	"Run_16_09", "Run_16_12"))
+testthat::expect_error({
+init_experiments(nexp = 2, names = names)
+})
 }
 \seealso{
 \code{\link{sci_figure}}

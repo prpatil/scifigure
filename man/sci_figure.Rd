@@ -6,7 +6,9 @@
 scientific experiments}
 \usage{
 sci_figure(experiments, hide_stages = NULL, names_of_stages = TRUE,
-  diff = FALSE)
+  diff = FALSE, showlegend = TRUE, cols = c("#D20000", "#007888",
+  "#CDCDCD", "black"), leg_text = c("Incorrect", "Different", "Unobserved",
+  "Original"))
 }
 \arguments{
 \item{experiments}{A data frame, which can be initialized with \code{init_experiments()},
@@ -26,6 +28,12 @@ stages should be displayed.}
 emphasize the differences between the experiments ("difference mode"). The difference mode uses
 a set of four symbols that are semantically close to the scenarios that they are encoding.
 The default value is \code{FALSE}.}
+
+\item{showlegend}{Do you want the legend to be shown?}
+
+\item{cols}{colors to use for the specific scenarios}
+
+\item{leg_text}{text for legend keys corresponding to the specific colors.}
 }
 \description{
 \code{sci_figure} creates a graphical representation of changes in a
@@ -47,11 +55,22 @@ sci_figure(exps, hide_stages = c("population", "analyst"))
 
 exps["analyst", "Exp2"] <- "different"
 exps["code", c("Exp2", "Exp3")] <- "unobserved"
-sci_figure(exps)
+sci_figure(exps, showlegend = FALSE)
 
 # Create the same figure using the difference mode
 
 sci_figure(exps, diff=TRUE)
+too_many = init_experiments(nexp = 30)
+
+testthat::expect_warning({
+sci_figure(too_many)
+}, "showing the first")
+
+exp2 = exps
+exp2[,1] = "bad"
+testthat::expect_error({
+sci_figure(exp2)
+}, "Invalid cell")
 
 }
 \seealso{

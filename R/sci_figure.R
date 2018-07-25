@@ -39,6 +39,17 @@
 #' # Create the same figure using the difference mode
 #'
 #' sci_figure(exps, diff=TRUE)
+#' too_many = init_experiments(nexp = 30)
+#'
+#' testthat::expect_warning({
+#' sci_figure(too_many)
+#' }, "showing the first")
+#'
+#' exp2 = exps
+#' exp2[,1] = "bad"
+#' testthat::expect_error({
+#' sci_figure(exp2)
+#' }, "Invalid cell")
 
 #'
 #' @seealso \code{\link{init_experiments}}

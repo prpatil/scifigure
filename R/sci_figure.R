@@ -37,7 +37,7 @@
 #'
 #' exps["analyst", "Exp2"] <- "different"
 #' exps["code", c("Exp2", "Exp3")] <- "unobserved"
-#' sci_figure(exps)
+#' sci_figure(exps, showlegend = FALSE)
 #'
 #' # Create the same figure using the difference mode
 #'
@@ -66,7 +66,7 @@ sci_figure <- function(experiments, hide_stages = NULL,
 
   if(!all(unlist(lapply(experiments, function(x){
     x %in% c("observed", "different", "unobserved", "incorrect")
-    })))){
+  })))){
     stop("Invalid cell value in experiments data frame.")
   }
 
@@ -87,7 +87,7 @@ sci_figure <- function(experiments, hide_stages = NULL,
 
   yht <- seq(0.95, 0.05, length = nrow(experiments))
 
-  if(names_of_stages){
+  if (names_of_stages){
     vp1 <- grid::viewport(x = 0.1, y = 0.5, width = 0.2, height = 0.9)
     grid::pushViewport(vp1)
     grid::grid.text(stage_names, x=0.9, y = yht, gp = gptext)
@@ -116,21 +116,23 @@ sci_figure <- function(experiments, hide_stages = NULL,
   grid::pushViewport(vp3)
   grid::grid.text(colnames(experiments), x = (1:ncol(experiments))/(ncol(experiments) + 1), y = 0.7, gp = gptext, rot = ifelse(ncol(experiments) > 12, 90, 0))
 
-  grid::upViewport()
-  vp4 <- grid::viewport(x = 0.9, y = 0.5, width = 0.2, height = 0.6)
-  grid::pushViewport(vp4)
-
-  if ( diff == FALSE ) {
-    grid::grid.rect(width = 0.25, height = 0.1, x = 0.3, y = c(0.2,0.4,0.6,0.8), gp = grid::gpar(fill = cols))
-  }
-  else {
-    grid::grid.raster(icons[[3]], x=0.3, y=0.8, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
-    grid::grid.raster(icons[[4]], x=0.3, y=0.6, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
-    grid::grid.raster(icons[[1]], x=0.3, y=0.4, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
-    grid::grid.raster(icons[[2]], x=0.3, y=0.2, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
-  }
-
   if (showlegend) {
+    grid::upViewport()
+    vp4 <- grid::viewport(x = 0.9, y = 0.5, width = 0.2, height = 0.6)
+    grid::pushViewport(vp4)
+
+
+    if ( diff == FALSE ) {
+      grid::grid.rect(width = 0.25, height = 0.1, x = 0.3, y = c(0.2,0.4,0.6,0.8), gp = grid::gpar(fill = cols))
+    }
+    else {
+      grid::grid.raster(icons[[3]], x=0.3, y=0.8, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
+      grid::grid.raster(icons[[4]], x=0.3, y=0.6, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
+      grid::grid.raster(icons[[1]], x=0.3, y=0.4, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
+      grid::grid.raster(icons[[2]], x=0.3, y=0.2, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))
+    }
+
+
     leg_text = c("Incorrect", "Different", "Unobserved", "Original")
     grid::grid.text(leg_text, x = 0.3, y = c(0.1, 0.3, 0.5, 0.7), gp = grid::gpar(fontsize = 14))
 

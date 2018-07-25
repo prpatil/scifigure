@@ -55,7 +55,7 @@ sci_figure(exps, hide_stages = c("population", "analyst"))
 
 exps["analyst", "Exp2"] <- "different"
 exps["code", c("Exp2", "Exp3")] <- "unobserved"
-sci_figure(exps)
+sci_figure(exps, showlegend = FALSE)
 
 # Create the same figure using the difference mode
 

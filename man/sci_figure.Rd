@@ -6,7 +6,9 @@
 scientific experiments}
 \usage{
 sci_figure(experiments, hide_stages = NULL, names_of_stages = TRUE,
-  diff = FALSE)
+  diff = FALSE, showlegend = TRUE, cols = c("#D20000", "#007888",
+  "#CDCDCD", "black"), leg_text = c("Incorrect", "Different", "Unobserved",
+  "Original"))
 }
 \arguments{
 \item{experiments}{A data frame, which can be initialized with \code{init_experiments()},
@@ -26,6 +28,12 @@ stages should be displayed.}
 emphasize the differences between the experiments ("difference mode"). The difference mode uses
 a set of four symbols that are semantically close to the scenarios that they are encoding.
 The default value is \code{FALSE}.}
+
+\item{showlegend}{Do you want the legend to be shown?}
+
+\item{cols}{colors to use for the specific scenarios}
+
+\item{leg_text}{text for legend keys corresponding to the specific colors.}
 }
 \description{
 \code{sci_figure} creates a graphical representation of changes in a

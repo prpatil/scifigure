@@ -49,6 +49,14 @@ are: \code{observed}, \code{different}, \code{unobserved}, \code{incorrect}.
 # Initialize the default experiments data frame
 exps <- init_experiments()
 sci_figure(exps)
+experiments = exps
+experiments["analyst", "Exp2"] <- "different"
+cols = c("#D20000", "yellow", "#CDCDCD", "black")
+sci_figure(experiments, cols = cols)
+hide_stages = NULL
+names_of_stages = TRUE
+diff = FALSE
+
 sci_figure(exps, hide_stages = c("population", "analyst"))
 
 # Do some manual manipulation to the experiments

@@ -31,6 +31,14 @@
 #' # Initialize the default experiments data frame
 #' exps <- init_experiments()
 #' sci_figure(exps)
+#' experiments = exps
+#' experiments["analyst", "Exp2"] <- "different"
+#' cols = c("#D20000", "yellow", "#CDCDCD", "black")
+#' sci_figure(experiments, cols = cols)
+#' hide_stages = NULL
+#' names_of_stages = TRUE
+#' diff = FALSE
+#'
 #' sci_figure(exps, hide_stages = c("population", "analyst"))
 #'
 #' # Do some manual manipulation to the experiments
@@ -59,13 +67,14 @@
 
 
 sci_figure <- function(experiments, hide_stages = NULL,
-                       names_of_stages = TRUE, diff=FALSE,
+                       names_of_stages = TRUE, diff = FALSE,
                        showlegend = TRUE,
                        cols = c("#D20000", "#007888","#CDCDCD", "black"),
                        leg_text = c("Incorrect", "Different", "Unobserved", "Original")) {
 
+  experiment_types = c("incorrect", "different", "unobserved", "observed")
   if(!all(unlist(lapply(experiments, function(x){
-    x %in% c("observed", "different", "unobserved", "incorrect")
+    x %in% experiment_types
   })))){
     stop("Invalid cell value in experiments data frame.")
   }
@@ -96,10 +105,24 @@ sci_figure <- function(experiments, hide_stages = NULL,
 
   if ( diff == FALSE ) {
     icons <- scifigure::icons
-  }
-  else {
+  } else {
     icons <- scifigure::icons_diff
   }
+
+
+  if (!missing(cols)) {
+    if (length(cols) < length(experiment_types)) {
+      cols = c(cols, rep("black",
+                         length = length(experiment_types) - length(cols)))
+    }
+    names(cols) = experiment_types
+    n_icons = names(icons)
+    icon_types = sapply(strsplit(n_icons, "_"), function(x) x[length(x)])
+    icons = mapply(function(icon, color) {
+      change_icon_color(icon, color)
+    }, icons, cols[icon_types], SIMPLIFY = FALSE)
+  }
+
 
 
   vp2 <- grid::viewport(x = 0.5, y = 0.5, width = 0.6, height = 0.9)
@@ -107,7 +130,11 @@ sci_figure <- function(experiments, hide_stages = NULL,
 
   for(j in 1:ncol(experiments)){
     for(i in 1:nrow(experiments)){
-      grid::grid.raster(icons[[paste(rownames(experiments)[i], experiments[i,j], sep = "_")]], x = j/(ncol(experiments)+1), y = yht[i], height = 0.08 - 0.03*(ncol(experiments) > 4), width = grid::unit(max(0.05, min(.1, 1/((ncol(experiments)*3)))), "snpc"))
+      grid::grid.raster(
+        icons[[paste(rownames(experiments)[i], experiments[i,j], sep = "_")]],
+        x = j/(ncol(experiments)+1), y = yht[i],
+        height = 0.08 - 0.03*(ncol(experiments) > 4),
+        width = grid::unit(max(0.05, min(.1, 1/((ncol(experiments)*3)))), "snpc"))
     }
   }
 
@@ -153,3 +180,4 @@ sci_figure <- function(experiments, hide_stages = NULL,
     grid::grid.text(leg_text, x = 0.3, y = ys, gp = grid::gpar(fontsize = 14))
   }
 }
+

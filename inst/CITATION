@@ -1,0 +1,11 @@
+structure(list(Patil066803 = structure(list(author = structure(list(
+    list(given = "Prasad", family = "Patil", role = NULL, email = NULL, 
+        comment = NULL), list(given = c("Roger", "D."), family = "Peng", 
+        role = NULL, email = NULL, comment = NULL), list(given = "Jeffrey", 
+        family = "Leek", role = NULL, email = NULL, comment = NULL)), class = "person"), 
+    title = "A statistical definition for reproducibility and replicability", 
+    year = "2016", doi = "10.1101/066803", publisher = "Cold Spring Harbor Laboratory", 
+    abstract = "Everyone agrees that reproducibility and replicability are fundamental characteristics of scientific studies. These topics are attracting increasing attention, scrutiny, and debate both in the popular press and the scientific literature. But there are no formal statistical definitions for these concepts, which leads to confusion since the same words are used for different concepts by different people in different fields. We provide formal and informal definitions of scientific studies, reproducibility, and replicability that can be used to clarify discussions around these concepts in the scientific and popular press.", 
+    url = "https://www.biorxiv.org/content/early/2016/07/29/066803", 
+    eprint = "https://www.biorxiv.org/content/early/2016/07/29/066803.full.pdf", 
+    journal = "bioRxiv"), bibtype = "Article", key = "Patil066803")), class = "bibentry", strings = structure(character(0), .Names = character(0)))

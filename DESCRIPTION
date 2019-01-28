@@ -1,18 +1,24 @@
 Package: scifigure
-Title: Visualize Reproducibility and Replicability in a Comparison of Scientific Studies
-Version: 0.1.1
-Authors@R: person("Prasad", "Patil", email = "prpatil42@gmail.com", role = c("aut", "cre"))
+Title: Visualize 'Reproducibility' and 'Replicability' in a 
+    Comparison of Scientific Studies
+Version: 0.1.4
+Authors@R: c(person("Prasad", "Patil", email = "prpatil42@gmail.com", role = c("aut", "cre")), person("Gehlenborg", "Nils", email = "nils@hms.harvard.edu", role ="aut"))
 Description: Users may specify what fundamental qualities of a new study have 
-             or have not changed in an attempt to reproduce or replicate an original study. A comparison of 
-			 the differences is visualized. Visualization approach follows Patil, Peng, and Leek (2016) <doi:10.1101/066803>.
+             or have not changed in an attempt to reproduce or replicate an 
+             original study. A comparison of the differences is visualized. 
+             Visualization approach follows 'Patil', 'Peng', and 
+             'Leek' (2016) <doi:10.1101/066803>.
 Depends:
-    R (>= 3.3.1)
+    R (>= 3.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 Imports:
 	grid
-Suggests: knitr,
-    rmarkdown
+Suggests: 
+    knitr,
+    rmarkdown,
+    covr,
+    testthat
 VignetteBuilder: knitr

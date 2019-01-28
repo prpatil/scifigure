@@ -1,5 +1,4 @@
 ## Resubmission
-
 * Fixed DOI format in DESCRIPTION.
 
 ## Test environments

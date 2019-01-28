@@ -1,5 +1,5 @@
 ---
-title: "Visualizing Scientific Replication with repfigure"
+title: "Visualizing Scientific Replication with scifigure"
 author: "Prasad Patil"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -32,7 +32,7 @@ Note that a legend is automatically generated, indicating that each step in each
 contents of exps to change change how elements of each experiment are displayed.
 
 ```{r, fig.width = 9, fig.height = 7}
-exps <- init_experiments(2, c("Brady et. al.", "Thomas et. al."))
+exps <- init_experiments(2, c("Brady et. al.", "Irving et. al."))
 exps["analysis_plan", 1] <- "unobserved"
 exps[c("experimenter", "analyst", "estimate"), 2] <- "different"
 sci_figure(exps, hide_stages <- c("population", "hypothesis"))

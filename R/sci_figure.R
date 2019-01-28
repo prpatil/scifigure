@@ -8,13 +8,16 @@
 #' @param experiments A data frame, which can be initialized with \code{init_experiments()},
 #' whose rownames are the predefined stages of a scientifc experiments, columnnames are
 #' the names of each experiment, and cell values represent the state of each stage
-#' in each experiment (states discussed below).
+#' in each experiment (states described below).
+#' @param custom_icons (optional) A list of bitmap matrices of custom icon images of length 
+#' matching \code{experiments} input. Bitmap icons must be 75 x 75 pixels.
+#' Default NULL, indicating that default icons will be used.
+#' @param stage_names Character vector of names of stages. Default names match Patil et. al.
+#' If set to NULL, all names will be suppressed. Use \code{hide_stages} (below) to suppress specific stage names.
 #' @param hide_stages (optional) A character vector with the names of the stages
 #' in the scientific experiment, i.e. rownames of \code{experiments}, which the user wishes
 #' to suppress from the figure output. The default value of \code{hide_stages} is NULL, indicating
 #' that all stages will be displayed.
-#' @param names_of_stages Logical indicating whether or not the names of the
-#' stages should be displayed.
 #' @param diff (optional) A Boolean flag to indicate whether the rendering of the figure should
 #' emphasize the differences between the experiments ("difference mode"). The difference mode uses
 #' a set of four symbols that are semantically close to the scenarios that they are encoding.
@@ -57,12 +60,7 @@
 #'
 #' @seealso \code{\link{init_experiments}}
 
-
-sci_figure <- function(experiments, hide_stages = NULL,
-                       names_of_stages = TRUE, diff=FALSE,
-                       showlegend = TRUE,
-                       cols = c("#D20000", "#007888","#CDCDCD", "black"),
-                       leg_text = c("Incorrect", "Different", "Unobserved", "Original")) {
+sci_figure <- function(experiments, custom_icons = NULL, stage_names = c("Population", "Question", "Hypothesis", "Exp. Design", "Experimenter", "Data", "Analysis Plan", "Analyst", "Code", "Estimate", "Claim"), hide_stages = NULL, diff=FALSE, showlegend = TRUE, cols = c("#D20000", "#007888","#CDCDCD", "black"), leg_text = c("Incorrect", "Different", "Unobserved", "Original")) {
 
   if(!all(unlist(lapply(experiments, function(x){
     x %in% c("observed", "different", "unobserved", "incorrect")
@@ -76,9 +74,7 @@ sci_figure <- function(experiments, hide_stages = NULL,
   }
 
   idx <- !(rownames(experiments) %in% hide_stages)
-  stage_names <- c("Population", "Question", "Hypothesis", "Exp. Design", "Experimenter", "Data", "Analysis Plan", "Analyst", "Code", "Estimate", "Claim")
   stage_names <- stage_names[idx]
-
   experiments <- experiments[idx,,drop=FALSE]
 
   grid::grid.newpage()
@@ -87,18 +83,25 @@ sci_figure <- function(experiments, hide_stages = NULL,
 
   yht <- seq(0.95, 0.05, length = nrow(experiments))
 
-  if (names_of_stages){
+  if (!is.null(stage_names)){
     vp1 <- grid::viewport(x = 0.1, y = 0.5, width = 0.2, height = 0.9)
     grid::pushViewport(vp1)
     grid::grid.text(stage_names, x=0.9, y = yht, gp = gptext)
     grid::upViewport()
   }
 
-  if ( diff == FALSE ) {
-    icons <- scifigure::icons
-  }
-  else {
-    icons <- scifigure::icons_diff
+  if(is.null(custom_icons)){
+	if ( diff == FALSE ) {
+		icons <- scifigure::icons
+	}
+	else {
+		icons <- scifigure::icons_diff
+	}
+  } else {
+	if(length(stage_names) != length(custom_icons)){
+		stop("Length of stage names does not match length of custom icon list.")
+	}
+	icons <- custom_icons
   }
 
 

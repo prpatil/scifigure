@@ -5,24 +5,30 @@
 \title{Create a figure depicting reproducibility/replicability of a set of
 scientific experiments}
 \usage{
-sci_figure(experiments, hide_stages = NULL, names_of_stages = TRUE,
-  diff = FALSE, showlegend = TRUE, cols = c("#D20000", "#007888",
-  "#CDCDCD", "black"), leg_text = c("Incorrect", "Different", "Unobserved",
-  "Original"))
+sci_figure(experiments, custom_icons = NULL,
+  stage_names = c("Population", "Question", "Hypothesis", "Exp. Design",
+  "Experimenter", "Data", "Analysis Plan", "Analyst", "Code", "Estimate",
+  "Claim"), hide_stages = NULL, diff = FALSE, showlegend = TRUE,
+  cols = c("#D20000", "#007888", "#CDCDCD", "black"),
+  leg_text = c("Incorrect", "Different", "Unobserved", "Original"))
 }
 \arguments{
 \item{experiments}{A data frame, which can be initialized with \code{init_experiments()},
 whose rownames are the predefined stages of a scientifc experiments, columnnames are
 the names of each experiment, and cell values represent the state of each stage
-in each experiment (states discussed below).}
+in each experiment (states described below).}
+
+\item{custom_icons}{(optional) A list of bitmap matrices of custom icon images of length 
+matching \code{experiments} input. Bitmap icons must be 75 x 75 pixels.
+Default NULL, indicating that default icons will be used.}
+
+\item{stage_names}{Character vector of names of stages. Default names match Patil et. al.
+If set to NULL, all names will be suppressed. Use \code{hide_stages} (below) to suppress specific stage names.}
 
 \item{hide_stages}{(optional) A character vector with the names of the stages
 in the scientific experiment, i.e. rownames of \code{experiments}, which the user wishes
 to suppress from the figure output. The default value of \code{hide_stages} is NULL, indicating
 that all stages will be displayed.}
-
-\item{names_of_stages}{Logical indicating whether or not the names of the
-stages should be displayed.}
 
 \item{diff}{(optional) A Boolean flag to indicate whether the rendering of the figure should
 emphasize the differences between the experiments ("difference mode"). The difference mode uses

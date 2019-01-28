@@ -10,6 +10,6 @@ icons_diff
 }
 \description{
 A dataset containing icon images showing difference rather than entity
-used to render all difference figures in the repfigure package.
+used to render all difference figures in the scifigure package.
 }
 \keyword{datasets}

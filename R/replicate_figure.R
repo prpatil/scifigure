@@ -11,7 +11,7 @@
 #' @export
 
 replicate_figure <- function(...){
-	exps <- init_experiments(2, names = c("Original", "Replication"))
+	exps <- init_experiments(2, exp_names = c("Original", "Replication"))
 	exps[c("experimenter", "data", "analyst", "code", "estimate", "claim"), "Replication"] <- "different"
 	sci_figure(exps, ...)
 }

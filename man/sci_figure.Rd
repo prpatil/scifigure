@@ -19,7 +19,7 @@ the names of each experiment, and cell values represent the state of each stage
 in each experiment (states described below).}
 
 \item{custom_icons}{(optional) A list of bitmap matrices of custom icon images of length 
-matching \code{experiments} input. Bitmap icons must be 75 x 75 pixels.
+matching \code{experiments} input. Bitmap icons must be 75 x 75 pixels. See vignette for detailed instructions and specifications.
 Default NULL, indicating that default icons will be used.}
 
 \item{stage_names}{Character vector of names of stages. Default names match Patil et. al.
@@ -37,7 +37,7 @@ The default value is \code{FALSE}.}
 
 \item{showlegend}{Do you want the legend to be shown?}
 
-\item{cols}{colors to use for the specific scenarios}
+\item{cols}{colors to use for the specific scenarios when diff = T or custom_icons used.}
 
 \item{leg_text}{text for legend keys corresponding to the specific colors.}
 }

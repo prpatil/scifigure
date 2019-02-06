@@ -10,7 +10,7 @@
 #' the names of each experiment, and cell values represent the state of each stage
 #' in each experiment (states described below).
 #' @param custom_icons (optional) A list of bitmap matrices of custom icon images of length 
-#' matching \code{experiments} input. Bitmap icons must be 75 x 75 pixels.
+#' matching \code{experiments} input. Bitmap icons must be 75 x 75 pixels. See vignette for detailed instructions and specifications.
 #' Default NULL, indicating that default icons will be used.
 #' @param stage_names Character vector of names of stages. Default names match Patil et. al.
 #' If set to NULL, all names will be suppressed. Use \code{hide_stages} (below) to suppress specific stage names.
@@ -23,7 +23,7 @@
 #' a set of four symbols that are semantically close to the scenarios that they are encoding.
 #' The default value is \code{FALSE}.
 #' @param showlegend Do you want the legend to be shown?
-#' @param cols colors to use for the specific scenarios
+#' @param cols colors to use for the specific scenarios when diff = T or custom_icons used.
 #' @param leg_text text for legend keys corresponding to the specific colors.
 #'
 #' @export
@@ -98,8 +98,8 @@ sci_figure <- function(experiments, custom_icons = NULL, stage_names = c("Popula
 		icons <- scifigure::icons_diff
 	}
   } else {
-	if(length(stage_names) != length(custom_icons)){
-		stop("Length of stage names does not match length of custom icon list.")
+	if(length(stage_names)*4 != length(custom_icons)){
+		stop("There must be four icons for each stage name.")
 	}
 	icons <- custom_icons
   }

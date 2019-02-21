@@ -1,6 +1,6 @@
 ---
 title: "Visualizing Scientific Replication with scifigure"
-author: "Prasad Patil and Jeff Leek with contributions from John Muschelli and Nils Gehlenborg"
+author: "Prasad Patil, John Muschelli, and Jeff Leek with contributions from Nils Gehlenborg"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 bibliography: references.bib
@@ -140,5 +140,7 @@ exps["questionnaire", "Exp2"] <- "incorrect"
 exps["result", c("Exp2", "Exp3")] <- "unobserved"
 sci_figure(exps, custom_icons = icon_list, stage_names = stage_names2)
 ```
+
+Another, simpler option would be to use diff = T mode and have ambiguous icons represent the custom stages you wish to display.
 
 ## References

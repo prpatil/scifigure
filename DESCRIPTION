@@ -4,7 +4,7 @@ Title: Visualize 'Reproducibility' and 'Replicability' in a
 Version: 0.2
 Authors@R: c(person("Prasad", "Patil", email = "prpatil42@gmail.com", role = c("aut", "cre")), 
 			 person("Gehlenborg", "Nils", email = "nils@hms.harvard.edu", role ="ctb"),
-			 person("Muschelli", "John", email = "muschellij2@gmail.com", role ="ctb"),
+			 person("Muschelli", "John", email = "muschellij2@gmail.com", role ="aut"),
 			 person("Leek", "Jeff", email = "jtleek@gmail.com", role ="aut"))
 Description: Users may specify what fundamental qualities of a new study have 
              or have not changed in an attempt to reproduce or replicate an 

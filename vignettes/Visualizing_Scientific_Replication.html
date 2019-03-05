@@ -11,7 +11,7 @@
 
 <meta name="author" content="Prasad Patil, John Muschelli, and Jeff Leek with contributions from Nils Gehlenborg" />
 
-<meta name="date" content="2019-02-21" />
+<meta name="date" content="2019-03-05" />
 
 <title>Visualizing Scientific Replication with scifigure</title>
 
@@ -372,7 +372,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Visualizing Scientific Replication with scifigure</h1>
 <h4 class="author"><em>Prasad Patil, John Muschelli, and Jeff Leek with contributions from Nils Gehlenborg</em></h4>
-<h4 class="date"><em>2019-02-21</em></h4>
+<h4 class="date"><em>2019-03-05</em></h4>
 
 </div>
 
@@ -421,30 +421,28 @@ sci_figure(exps)</code></pre>
 </div>
 <div id="using-custom-icons" class="section level2">
 <h2>Using Custom Icons</h2>
-<p>Users may specificy custom icons for a scientific study protocol of their choosing using the custom_icons option for sci_figure. These icons must be read into R and provided as a list in the proper nomenclature to the function. There must be one icons for each of the states (observed, unobserved, different, incorrect), and the list names must be of the format (stage name)_(state) (see below). Default colors for the four states can be found in the documentation of the sci_figure function, or custom legend colors can be specified with the col option. We recommend icons be 75 by 75 pixels or smaller. Below we go through an example of specifying a custom set of four icons.</p>
-<p>First, we read images from a specified directory.</p>
-<pre class="r"><code>knitr::opts_knit$set(root.dir = &quot;C:/test_icons&quot;)</code></pre>
+<p>Users may specificy custom icons for a scientific study protocol of their choosing using the custom_icons option for sci_figure. These icons must be read into R and provided as a list in the proper nomenclature to the function. There must be one icon for each of the states (observed, unobserved, different, incorrect), and the list names must be of the format (stage name)_(state) (see below). Default colors for the four states can be found in the documentation of the sci_figure function, or custom legend colors can be specified with the col option. We recommend icons be 75 by 75 pixels or smaller. Below we go through an example of specifying a custom set of four icons. These icons are being loaded from inst/extdata, but could be read from any file folder.</p>
 <pre class="r"><code>library(png)
 
-questionnaire_observed &lt;- readPNG(&quot;questionnaire_observed.PNG&quot;, native = T)
-questionnaire_different &lt;- readPNG(&quot;questionnaire_different.PNG&quot;, native = T)
-questionnaire_incorrect &lt;- readPNG(&quot;questionnaire_incorrect.PNG&quot;, native = T)
-questionnaire_unobserved &lt;- readPNG(&quot;questionnaire_unobserved.PNG&quot;, native = T)
+questionnaire_observed &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;questionnaire_observed.PNG&quot;, package = &quot;scifigure&quot;), native = T)
+questionnaire_different &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;questionnaire_different.PNG&quot;, package = &quot;scifigure&quot;), native = T)
+questionnaire_incorrect &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;questionnaire_incorrect.PNG&quot;, package = &quot;scifigure&quot;), native = T)
+questionnaire_unobserved &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;questionnaire_unobserved.PNG&quot;, package = &quot;scifigure&quot;), native = T)
 
-measurement_observed &lt;- readPNG(&quot;measurement_observed.PNG&quot;, native = T)
-measurement_different &lt;- readPNG(&quot;measurement_different.PNG&quot;, native = T)
-measurement_incorrect &lt;- readPNG(&quot;measurement_incorrect.PNG&quot;, native = T)
-measurement_unobserved &lt;- readPNG(&quot;measurement_unobserved.PNG&quot;, native = T)
+measurement_observed &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;measurement_observed.PNG&quot;, package = &quot;scifigure&quot;), native = T)
+measurement_different &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;measurement_different.PNG&quot;, package = &quot;scifigure&quot;), native = T)
+measurement_incorrect &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;measurement_incorrect.PNG&quot;, package = &quot;scifigure&quot;), native = T)
+measurement_unobserved &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;measurement_unobserved.PNG&quot;, package = &quot;scifigure&quot;), native = T)
 
-analysis_observed &lt;- readPNG(&quot;analysis_observed.PNG&quot;, native = T)
-analysis_different &lt;- readPNG(&quot;analysis_different.PNG&quot;, native = T)
-analysis_incorrect &lt;- readPNG(&quot;analysis_incorrect.PNG&quot;, native = T)
-analysis_unobserved &lt;- readPNG(&quot;analysis_unobserved.PNG&quot;, native = T)
+analysis_observed &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;analysis_observed.PNG&quot;, package = &quot;scifigure&quot;), native = T)
+analysis_different &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;analysis_different.PNG&quot;, package = &quot;scifigure&quot;), native = T)
+analysis_incorrect &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;analysis_incorrect.PNG&quot;, package = &quot;scifigure&quot;), native = T)
+analysis_unobserved &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;analysis_unobserved.PNG&quot;, package = &quot;scifigure&quot;), native = T)
 
-result_observed &lt;- readPNG(&quot;result_observed.PNG&quot;, native = T)
-result_different &lt;- readPNG(&quot;result_different.PNG&quot;, native = T)
-result_incorrect &lt;- readPNG(&quot;result_incorrect.PNG&quot;, native = T)
-result_unobserved &lt;- readPNG(&quot;result_unobserved.PNG&quot;, native = T)
+result_observed &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;result_observed.PNG&quot;, package = &quot;scifigure&quot;), native = T)
+result_different &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;result_different.PNG&quot;, package = &quot;scifigure&quot;), native = T)
+result_incorrect &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;result_incorrect.PNG&quot;, package = &quot;scifigure&quot;), native = T)
+result_unobserved &lt;- readPNG(system.file(&quot;extdata&quot;, &quot;result_unobserved.PNG&quot;, package = &quot;scifigure&quot;), native = T)
 
 icon_list &lt;- list(&quot;questionnaire_observed&quot;=questionnaire_observed, &quot;questionnaire_different&quot;=questionnaire_different,
               &quot;questionnaire_incorrect&quot;=questionnaire_incorrect, &quot;questionnaire_unobserved&quot;=questionnaire_unobserved,

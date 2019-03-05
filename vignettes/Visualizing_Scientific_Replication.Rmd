@@ -86,39 +86,33 @@ sci_figure(exps, diff = TRUE)
 ## Using Custom Icons
 
 Users may specificy custom icons for a scientific study protocol of their choosing using the custom_icons option for sci_figure. These icons must be read into
-R and provided as a list in the proper nomenclature to the function. There must be one icons for each of the states (observed, unobserved, different, incorrect), 
+R and provided as a list in the proper nomenclature to the function. There must be one icon for each of the states (observed, unobserved, different, incorrect), 
 and the list names must be of the format (stage name)_(state) (see below). Default colors for the four states can be found in the documentation of the sci_figure 
 function, or custom legend colors can be specified with the col option. We recommend icons be 75 by 75 pixels or smaller. 
-Below we go through an example of specifying a custom set of four icons.
-
-First, we read images from a specified directory.
-
-```{r setup}
-knitr::opts_knit$set(root.dir = "C:/test_icons")
-```
+Below we go through an example of specifying a custom set of four icons. These icons are being loaded from inst/extdata, but could be read from any file folder.
 
 ```{r, fig.width = 14, fig.height = 7}
 library(png)
 
-questionnaire_observed <- readPNG("questionnaire_observed.PNG", native = T)
-questionnaire_different <- readPNG("questionnaire_different.PNG", native = T)
-questionnaire_incorrect <- readPNG("questionnaire_incorrect.PNG", native = T)
-questionnaire_unobserved <- readPNG("questionnaire_unobserved.PNG", native = T)
+questionnaire_observed <- readPNG(system.file("extdata", "questionnaire_observed.PNG", package = "scifigure"), native = T)
+questionnaire_different <- readPNG(system.file("extdata", "questionnaire_different.PNG", package = "scifigure"), native = T)
+questionnaire_incorrect <- readPNG(system.file("extdata", "questionnaire_incorrect.PNG", package = "scifigure"), native = T)
+questionnaire_unobserved <- readPNG(system.file("extdata", "questionnaire_unobserved.PNG", package = "scifigure"), native = T)
 
-measurement_observed <- readPNG("measurement_observed.PNG", native = T)
-measurement_different <- readPNG("measurement_different.PNG", native = T)
-measurement_incorrect <- readPNG("measurement_incorrect.PNG", native = T)
-measurement_unobserved <- readPNG("measurement_unobserved.PNG", native = T)
+measurement_observed <- readPNG(system.file("extdata", "measurement_observed.PNG", package = "scifigure"), native = T)
+measurement_different <- readPNG(system.file("extdata", "measurement_different.PNG", package = "scifigure"), native = T)
+measurement_incorrect <- readPNG(system.file("extdata", "measurement_incorrect.PNG", package = "scifigure"), native = T)
+measurement_unobserved <- readPNG(system.file("extdata", "measurement_unobserved.PNG", package = "scifigure"), native = T)
 
-analysis_observed <- readPNG("analysis_observed.PNG", native = T)
-analysis_different <- readPNG("analysis_different.PNG", native = T)
-analysis_incorrect <- readPNG("analysis_incorrect.PNG", native = T)
-analysis_unobserved <- readPNG("analysis_unobserved.PNG", native = T)
+analysis_observed <- readPNG(system.file("extdata", "analysis_observed.PNG", package = "scifigure"), native = T)
+analysis_different <- readPNG(system.file("extdata", "analysis_different.PNG", package = "scifigure"), native = T)
+analysis_incorrect <- readPNG(system.file("extdata", "analysis_incorrect.PNG", package = "scifigure"), native = T)
+analysis_unobserved <- readPNG(system.file("extdata", "analysis_unobserved.PNG", package = "scifigure"), native = T)
 
-result_observed <- readPNG("result_observed.PNG", native = T)
-result_different <- readPNG("result_different.PNG", native = T)
-result_incorrect <- readPNG("result_incorrect.PNG", native = T)
-result_unobserved <- readPNG("result_unobserved.PNG", native = T)
+result_observed <- readPNG(system.file("extdata", "result_observed.PNG", package = "scifigure"), native = T)
+result_different <- readPNG(system.file("extdata", "result_different.PNG", package = "scifigure"), native = T)
+result_incorrect <- readPNG(system.file("extdata", "result_incorrect.PNG", package = "scifigure"), native = T)
+result_unobserved <- readPNG(system.file("extdata", "result_unobserved.PNG", package = "scifigure"), native = T)
 
 icon_list <- list("questionnaire_observed"=questionnaire_observed, "questionnaire_different"=questionnaire_different,
 		      "questionnaire_incorrect"=questionnaire_incorrect, "questionnaire_unobserved"=questionnaire_unobserved,

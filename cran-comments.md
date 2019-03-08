@@ -1,5 +1,6 @@
 # Update Resubmission
 * Moved example icons to inst/extdata to clear directory change warning
+* Standardized icon file extension to lowercase
 
 ## Updates
 * diff = T mode, custom icon input for sci_figure function allows users to visualize a wider variety of scientific protocols

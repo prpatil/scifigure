@@ -6,7 +6,7 @@
 #' original study.
 #'
 #' @param experiments A data frame, which can be initialized with \code{init_experiments()},
-#' whose rownames are the predefined stages of a scientifc experiments, columnnames are
+#' whose rownames are the predefined stages of a scientifc experiments, column names are
 #' the names of each experiment, and cell values represent the state of each stage
 #' in each experiment (states discussed below).
 #' @param hide_stages (optional) A character vector with the names of the stages
@@ -22,7 +22,10 @@
 #' @param showlegend Do you want the legend to be shown?
 #' @param cols colors to use for the specific scenarios
 #' @param leg_text text for legend keys corresponding to the specific colors.
-#'
+#' @param fontsize Size of the font.  A calculation will change it but you
+#' can adjust this accordingly
+#' @param fig.height Height of the figures
+#' @param fig.width Width of the figures
 #' @export
 #' @note For the parameter \code{experiments}, the four values any cell may take
 #' are: \code{observed}, \code{different}, \code{unobserved}, \code{incorrect}.
@@ -35,6 +38,13 @@
 #' experiments["analyst", "Exp2"] <- "different"
 #' cols = c("#D20000", "yellow", "#CDCDCD", "black")
 #' sci_figure(experiments, cols = cols)
+#' sci_figure(experiments, cols = cols, diff = TRUE)
+#' sci_figure(experiments, cols = cols, diff = TRUE,
+#' hide_stages = "population")
+#' sci_figure(experiments,
+#' cols = c("yellow", "#CDCDCD", "black"),
+#' leg_text = c("Different", "Unobserved", "Original"),
+#' diff = TRUE)
 #' hide_stages = NULL
 #' names_of_stages = TRUE
 #' diff = FALSE
@@ -61,7 +71,6 @@
 #' testthat::expect_error({
 #' sci_figure(exp2)
 #' }, "Invalid cell")
-
 #'
 #' @seealso \code{\link{init_experiments}}
 
@@ -69,17 +78,21 @@
 sci_figure <- function(experiments, hide_stages = NULL,
                        names_of_stages = TRUE, diff = FALSE,
                        showlegend = TRUE,
-                       cols = c("#D20000", "#007888","#CDCDCD", "black"),
-                       leg_text = c("Incorrect", "Different", "Unobserved", "Original")) {
+                       cols = c(incorect = "#D20000",
+                                different = "#007888",
+                                unobserved = "#CDCDCD",
+                                original = "black"),
+                       leg_text = c("Incorrect", "Different", "Unobserved", "Original"),
+                       fontsize = 16,
+                       fig.height = 0.08,
+                       fig.width = 0.05) {
 
   experiment_types = c("incorrect", "different", "unobserved", "observed")
-  if(!all(unlist(lapply(experiments, function(x){
-    x %in% experiment_types
-  })))){
+  if (!all(unlist(experiments) %in% experiment_types)) {
     stop("Invalid cell value in experiments data frame.")
   }
 
-  if(ncol(experiments) > 20){
+  if (ncol(experiments) > 20){
     experiments <- experiments[,1:20]
     warning("Only showing the first 20 experiments for ease of plotting.")
   }
@@ -92,7 +105,7 @@ sci_figure <- function(experiments, hide_stages = NULL,
 
   grid::grid.newpage()
 
-  gptext <- grid::gpar(fontsize = 16 - min(nrow(experiments), 7))
+  gptext <- grid::gpar(fontsize = fontsize - min(nrow(experiments), 7))
 
   yht <- seq(0.95, 0.05, length = nrow(experiments))
 
@@ -115,12 +128,14 @@ sci_figure <- function(experiments, hide_stages = NULL,
       cols = c(cols, rep("black",
                          length = length(experiment_types) - length(cols)))
     }
-    names(cols) = experiment_types
-    n_icons = names(icons)
-    icon_types = sapply(strsplit(n_icons, "_"), function(x) x[length(x)])
-    icons = mapply(function(icon, color) {
-      change_icon_color(icon, color)
-    }, icons, cols[icon_types], SIMPLIFY = FALSE)
+    if (!all(cols == c("#D20000", "#007888", "#CDCDCD", "black"))) {
+      names(cols) = experiment_types
+      n_icons = names(icons)
+      icon_types = sapply(strsplit(n_icons, "_"), function(x) x[length(x)])
+      icons = mapply(function(icon, color) {
+        change_icon_color(icon, color)
+      }, icons, cols[icon_types], SIMPLIFY = FALSE)
+    }
   }
 
 
@@ -133,8 +148,8 @@ sci_figure <- function(experiments, hide_stages = NULL,
       grid::grid.raster(
         icons[[paste(rownames(experiments)[i], experiments[i,j], sep = "_")]],
         x = j/(ncol(experiments)+1), y = yht[i],
-        height = 0.08 - 0.03*(ncol(experiments) > 4),
-        width = grid::unit(max(0.05, min(.1, 1/((ncol(experiments)*3)))), "snpc"))
+        height = fig.height - 0.03*(ncol(experiments) > 4),
+        width = grid::unit(max(fig.width, min(.1, 1/((ncol(experiments)*3)))), "snpc"))
     }
   }
 
@@ -155,8 +170,7 @@ sci_figure <- function(experiments, hide_stages = NULL,
 
     if ( diff == FALSE ) {
       grid::grid.rect(width = 0.25, height = 0.1, x = 0.3, y = ys2, gp = grid::gpar(fill = cols))
-    }
-    else {
+    } else {
       make_grid = function(icon, y_value) {
         if (!is.na(y_value)) {
           grid::grid.raster(icon, x=0.3, y=y_value, height=grid::unit(0.18, "snpc"), width=grid::unit(0.18, "snpc"))

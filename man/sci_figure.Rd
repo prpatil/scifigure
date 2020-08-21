@@ -6,13 +6,14 @@
 scientific experiments}
 \usage{
 sci_figure(experiments, hide_stages = NULL, names_of_stages = TRUE,
-  diff = FALSE, showlegend = TRUE, cols = c("#D20000", "#007888",
-  "#CDCDCD", "black"), leg_text = c("Incorrect", "Different", "Unobserved",
-  "Original"))
+  diff = FALSE, showlegend = TRUE, cols = c(incorect = "#D20000",
+  different = "#007888", unobserved = "#CDCDCD", original = "black"),
+  leg_text = c("Incorrect", "Different", "Unobserved", "Original"),
+  fontsize = 16, fig.height = 0.08, fig.width = 0.05)
 }
 \arguments{
 \item{experiments}{A data frame, which can be initialized with \code{init_experiments()},
-whose rownames are the predefined stages of a scientifc experiments, columnnames are
+whose rownames are the predefined stages of a scientifc experiments, column names are
 the names of each experiment, and cell values represent the state of each stage
 in each experiment (states discussed below).}
 
@@ -34,6 +35,13 @@ The default value is \code{FALSE}.}
 \item{cols}{colors to use for the specific scenarios}
 
 \item{leg_text}{text for legend keys corresponding to the specific colors.}
+
+\item{fontsize}{Size of the font.  A calculation will change it but you
+can adjust this accordingly}
+
+\item{fig.height}{Height of the figures}
+
+\item{fig.width}{Width of the figures}
 }
 \description{
 \code{sci_figure} creates a graphical representation of changes in a
@@ -53,6 +61,13 @@ experiments = exps
 experiments["analyst", "Exp2"] <- "different"
 cols = c("#D20000", "yellow", "#CDCDCD", "black")
 sci_figure(experiments, cols = cols)
+sci_figure(experiments, cols = cols, diff = TRUE)
+sci_figure(experiments, cols = cols, diff = TRUE,
+hide_stages = "population")
+sci_figure(experiments,
+cols = c("yellow", "#CDCDCD", "black"),
+leg_text = c("Different", "Unobserved", "Original"),
+diff = TRUE)
 hide_stages = NULL
 names_of_stages = TRUE
 diff = FALSE

@@ -8,19 +8,22 @@
 #' @param experiments A data frame, which can be initialized with \code{init_experiments()},
 #' whose rownames are the predefined stages of a scientifc experiments, column names are
 #' the names of each experiment, and cell values represent the state of each stage
-#' in each experiment (states discussed below).
+#' in each experiment (states described below).
+#' @param custom_icons (optional) A list of bitmap matrices of custom icon images of length
+#' matching \code{experiments} input. Bitmap icons must be 75 x 75 pixels. See vignette for detailed instructions and specifications.
+#' Default NULL, indicating that default icons will be used.
+#' @param stage_names Character vector of names of stages. Default names match Patil et. al.
+#' If set to NULL, all names will be suppressed. Use \code{hide_stages} (below) to suppress specific stage names.
 #' @param hide_stages (optional) A character vector with the names of the stages
 #' in the scientific experiment, i.e. rownames of \code{experiments}, which the user wishes
 #' to suppress from the figure output. The default value of \code{hide_stages} is NULL, indicating
 #' that all stages will be displayed.
-#' @param names_of_stages Logical indicating whether or not the names of the
-#' stages should be displayed.
 #' @param diff (optional) A Boolean flag to indicate whether the rendering of the figure should
 #' emphasize the differences between the experiments ("difference mode"). The difference mode uses
 #' a set of four symbols that are semantically close to the scenarios that they are encoding.
 #' The default value is \code{FALSE}.
 #' @param showlegend Do you want the legend to be shown?
-#' @param cols colors to use for the specific scenarios
+#' @param cols colors to use for the specific scenarios when diff = T or custom_icons used.
 #' @param leg_text text for legend keys corresponding to the specific colors.
 #' @param fontsize Size of the font.  A calculation will change it but you
 #' can adjust this accordingly
@@ -46,7 +49,6 @@
 #' leg_text = c("Different", "Unobserved", "Original"),
 #' diff = TRUE)
 #' hide_stages = NULL
-#' names_of_stages = TRUE
 #' diff = FALSE
 #'
 #' sci_figure(exps, hide_stages = c("population", "analyst"))
@@ -73,22 +75,27 @@
 #' }, "Invalid cell")
 #'
 #' @seealso \code{\link{init_experiments}}
-
-
-sci_figure <- function(experiments, hide_stages = NULL,
-                       names_of_stages = TRUE, diff = FALSE,
-                       showlegend = TRUE,
-                       cols = c(incorect = "#D20000",
-                                different = "#007888",
-                                unobserved = "#CDCDCD",
-                                original = "black"),
-                       leg_text = c("Incorrect", "Different", "Unobserved", "Original"),
-                       fontsize = 16,
-                       fig.height = 0.08,
-                       fig.width = 0.05) {
+sci_figure <- function(
+  experiments,
+  custom_icons = NULL,
+  stage_names = c("Population", "Question", "Hypothesis",
+                  "Exp. Design", "Experimenter", "Data",
+                  "Analysis Plan", "Analyst", "Code", "Estimate", "Claim"),
+  hide_stages = NULL,
+  diff = FALSE,
+  showlegend = TRUE,
+  cols = c(incorect = "#D20000",
+           different = "#007888",
+           unobserved = "#CDCDCD",
+           original = "black"),
+  leg_text = c("Incorrect", "Different", "Unobserved", "Original"),
+  fontsize = 16,
+  fig.height = 0.08,
+  fig.width = 0.05) {
 
   experiment_types = c("incorrect", "different", "unobserved", "observed")
   if (!all(unlist(experiments) %in% experiment_types)) {
+
     stop("Invalid cell value in experiments data frame.")
   }
 
@@ -98,9 +105,7 @@ sci_figure <- function(experiments, hide_stages = NULL,
   }
 
   idx <- !(rownames(experiments) %in% hide_stages)
-  stage_names <- c("Population", "Question", "Hypothesis", "Exp. Design", "Experimenter", "Data", "Analysis Plan", "Analyst", "Code", "Estimate", "Claim")
   stage_names <- stage_names[idx]
-
   experiments <- experiments[idx,,drop=FALSE]
 
   grid::grid.newpage()
@@ -109,17 +114,26 @@ sci_figure <- function(experiments, hide_stages = NULL,
 
   yht <- seq(0.95, 0.05, length = nrow(experiments))
 
-  if (names_of_stages){
+  if (!is.null(stage_names)){
     vp1 <- grid::viewport(x = 0.1, y = 0.5, width = 0.2, height = 0.9)
     grid::pushViewport(vp1)
     grid::grid.text(stage_names, x=0.9, y = yht, gp = gptext)
     grid::upViewport()
   }
 
-  if ( diff == FALSE ) {
-    icons <- scifigure::icons
+
+  if(is.null(custom_icons)){
+    if ( diff == FALSE ) {
+      icons <- scifigure::icons
+    }
+    else {
+      icons <- scifigure::icons_diff
+    }
   } else {
-    icons <- scifigure::icons_diff
+    if(length(stage_names)*4 != length(custom_icons)){
+      stop("There must be four icons for each stage name.")
+    }
+    icons <- custom_icons
   }
 
 
@@ -188,8 +202,6 @@ sci_figure <- function(experiments, hide_stages = NULL,
 
 
     grid::grid.text(leg_text, x = 0.3, y = ys, gp = grid::gpar(fontsize = 14))
-
-
     grid::grid.rect(width = 0.25, height = 0.1, x = 0.3, y = ys2, gp = grid::gpar(fill = cols))
     grid::grid.text(leg_text, x = 0.3, y = ys, gp = grid::gpar(fontsize = 14))
   }

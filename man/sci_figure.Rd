@@ -5,25 +5,39 @@
 \title{Create a figure depicting reproducibility/replicability of a set of
 scientific experiments}
 \usage{
-sci_figure(experiments, hide_stages = NULL, names_of_stages = TRUE,
-  diff = FALSE, showlegend = TRUE, cols = c(incorect = "#D20000",
-  different = "#007888", unobserved = "#CDCDCD", original = "black"),
+sci_figure(
+  experiments,
+  custom_icons = NULL,
+  stage_names = c("Population", "Question", "Hypothesis", "Exp. Design",
+    "Experimenter", "Data", "Analysis Plan", "Analyst", "Code", "Estimate", "Claim"),
+  hide_stages = NULL,
+  diff = FALSE,
+  showlegend = TRUE,
+  cols = c(incorect = "#D20000", different = "#007888", unobserved = "#CDCDCD",
+    original = "black"),
   leg_text = c("Incorrect", "Different", "Unobserved", "Original"),
-  fontsize = 16, fig.height = 0.08, fig.width = 0.05)
+  fontsize = 16,
+  fig.height = 0.08,
+  fig.width = 0.05
+)
 }
 \arguments{
 \item{experiments}{A data frame, which can be initialized with \code{init_experiments()},
 whose rownames are the predefined stages of a scientifc experiments, column names are
 the names of each experiment, and cell values represent the state of each stage
-in each experiment (states discussed below).}
+in each experiment (states described below).}
+
+\item{custom_icons}{(optional) A list of bitmap matrices of custom icon images of length
+matching \code{experiments} input. Bitmap icons must be 75 x 75 pixels. See vignette for detailed instructions and specifications.
+Default NULL, indicating that default icons will be used.}
+
+\item{stage_names}{Character vector of names of stages. Default names match Patil et. al.
+If set to NULL, all names will be suppressed. Use \code{hide_stages} (below) to suppress specific stage names.}
 
 \item{hide_stages}{(optional) A character vector with the names of the stages
 in the scientific experiment, i.e. rownames of \code{experiments}, which the user wishes
 to suppress from the figure output. The default value of \code{hide_stages} is NULL, indicating
 that all stages will be displayed.}
-
-\item{names_of_stages}{Logical indicating whether or not the names of the
-stages should be displayed.}
 
 \item{diff}{(optional) A Boolean flag to indicate whether the rendering of the figure should
 emphasize the differences between the experiments ("difference mode"). The difference mode uses
@@ -32,7 +46,7 @@ The default value is \code{FALSE}.}
 
 \item{showlegend}{Do you want the legend to be shown?}
 
-\item{cols}{colors to use for the specific scenarios}
+\item{cols}{colors to use for the specific scenarios when diff = T or custom_icons used.}
 
 \item{leg_text}{text for legend keys corresponding to the specific colors.}
 
@@ -69,7 +83,6 @@ cols = c("yellow", "#CDCDCD", "black"),
 leg_text = c("Different", "Unobserved", "Original"),
 diff = TRUE)
 hide_stages = NULL
-names_of_stages = TRUE
 diff = FALSE
 
 sci_figure(exps, hide_stages = c("population", "analyst"))

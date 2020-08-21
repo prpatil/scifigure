@@ -1,8 +1,11 @@
 Package: scifigure
 Title: Visualize 'Reproducibility' and 'Replicability' in a 
     Comparison of Scientific Studies
-Version: 0.1.5
-Authors@R: c(person("Prasad", "Patil", email = "prpatil42@gmail.com", role = c("aut", "cre")), person("Gehlenborg", "Nils", email = "nils@hms.harvard.edu", role ="aut"))
+Version: 0.2
+Authors@R: c(person("Prasad", "Patil", email = "prpatil42@gmail.com", role = c("aut", "cre")), 
+			 person("Gehlenborg", "Nils", email = "nils@hms.harvard.edu", role ="ctb"),
+			 person("Muschelli", "John", email = "muschellij2@gmail.com", role ="ctb"),
+			 person("Leek", "Jeff", email = "jtleek@gmail.com", role ="aut"))
 Description: Users may specify what fundamental qualities of a new study have 
              or have not changed in an attempt to reproduce or replicate an 
              original study. A comparison of the differences is visualized. 
@@ -10,10 +13,12 @@ Description: Users may specify what fundamental qualities of a new study have
              'Leek' (2016) <doi:10.1101/066803>.
 Depends:
     R (>= 3.0)
+BugReports: https://github.com/prpatil/scifigure/issues
+URL: https://github.com/prpatil/scifigure
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1
 Imports:
 	grid,
 	grDevices
@@ -21,5 +26,6 @@ Suggests:
     knitr,
     rmarkdown,
     covr,
-    testthat
+    testthat,
+	png
 VignetteBuilder: knitr

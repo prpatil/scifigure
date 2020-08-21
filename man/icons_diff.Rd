@@ -4,12 +4,14 @@
 \name{icons_diff}
 \alias{icons_diff}
 \title{repfigure icons_diff}
-\format{A list of length 44, with each item a 75x75x4 bitmap}
+\format{
+A list of length 44, with each item a 75x75x4 bitmap
+}
 \usage{
 icons_diff
 }
 \description{
 A dataset containing icon images showing difference rather than entity
-used to render all difference figures in the repfigure package.
+used to render all difference figures in the scifigure package.
 }
 \keyword{datasets}

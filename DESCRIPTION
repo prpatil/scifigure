@@ -13,12 +13,15 @@ Description: Users may specify what fundamental qualities of a new study have
              'Leek' (2016) <doi:10.1101/066803>.
 Depends:
     R (>= 3.0)
+BugReports: https://github.com/prpatil/scifigure/issues
+URL: https://github.com/prpatil/scifigure
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Imports:
-	grid
+	grid,
+	grDevices
 Suggests: 
     knitr,
     rmarkdown,

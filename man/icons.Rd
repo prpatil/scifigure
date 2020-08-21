@@ -4,7 +4,9 @@
 \name{icons}
 \alias{icons}
 \title{scifigure icons}
-\format{A list of length 44, with each item a 75x75x4 bitmap}
+\format{
+A list of length 44, with each item a 75x75x4 bitmap
+}
 \usage{
 icons
 }

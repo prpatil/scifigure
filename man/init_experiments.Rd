@@ -4,10 +4,12 @@
 \alias{init_experiments}
 \title{Initialize a skeleton data frame to create a figure with \code{sci_figure}}
 \usage{
-init_experiments(nexp = 3, exp_names = paste0("Exp", 1:nexp),
-  stage_names = c("population", "question", "hypothesis",
-  "experimental_design", "experimenter", "data", "analysis_plan",
-  "analyst", "code", "estimate", "claim"))
+init_experiments(
+  nexp = 3,
+  exp_names = paste0("Exp", 1:nexp),
+  stage_names = c("population", "question", "hypothesis", "experimental_design",
+    "experimenter", "data", "analysis_plan", "analyst", "code", "estimate", "claim")
+)
 }
 \arguments{
 \item{nexp}{The number of scientific experiments to be represented in the data frame, i.e. number of columns.}
